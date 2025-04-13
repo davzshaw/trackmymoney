@@ -88,6 +88,25 @@ docker run -p 3000:3000 davshaw/trackmymoney
 
 ```
 
+
+### 📘 Documentación de la API (Swagger)
+
+La documentación interactiva de la API está disponible a través de Swagger UI.
+
+### 🔗 Acceso
+
+Puedes acceder a la documentación en la siguiente ruta:
+
+
+[http://localhost:3000/docs](http://localhost:3000/docs)
+
+```
+
+> Es importante de tener el archivo `swagger.json` en la carpeta `public/`.
+
+
+```
+
 Con esto, la aplicación estará disponible en [http://localhost:3000](http://localhost:3000/) 
 ----------
 
