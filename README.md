@@ -103,6 +103,8 @@ Puedes acceder a la documentación en la siguiente ruta:
 ```
 
 > Es importante de tener el archivo `swagger.json` en la carpeta `public/`.
+Verificar si esta instalado swagger , aveces puede fallar
+npm install swagger-ui-react
 
 
 ```
