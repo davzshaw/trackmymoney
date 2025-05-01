@@ -1,4 +1,6 @@
 import "./globals.css";
+import { ClerkProvider } from "@clerk/nextjs";
+import { esES } from "@clerk/localizations";
 
 export default function RootLayout({
   children,
@@ -6,12 +8,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <head>
-        <title>Track My Money</title>
-        <meta name="description" content="Manage your finances effectively with Track My Money." />
-      </head>
-      <body>{children}</body>
-    </html>
+    <ClerkProvider localization={esES}>
+      <html lang="es">
+        <head>
+          <title>Track My Money</title>
+          <meta
+            name="description"
+            content="Gestiona tus finanzas efectivamente con Track My Money."
+          />
+        </head>
+        <body>{children}</body>
+      </html>
+    </ClerkProvider>
   );
 }
