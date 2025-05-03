@@ -117,7 +117,7 @@ export default function Page() {
                 
                 <div className="pt-4 text-center">
                   <Link 
-                    href="/sign-up" 
+                    href="/pages/sign-up" 
                     className="text-white text-sm hover:text-emerald-300 transition-colors duration-300 inline-flex items-center gap-1 font-medium"
                   >
                     ¿Aún no tienes cuenta? <span className="underline font-bold">¡Crea una ya mismo!</span>

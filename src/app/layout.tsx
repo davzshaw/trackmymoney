@@ -1,6 +1,7 @@
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import { esES } from "@clerk/localizations";
+import HeaderClient from "../components/HeaderClient";
 
 export default function RootLayout({
   children,
@@ -17,7 +18,12 @@ export default function RootLayout({
             content="Gestiona tus finanzas efectivamente con Track My Money."
           />
         </head>
-        <body>{children}</body>
+        <body>
+          <HeaderClient />
+          <main>
+            {children}
+          </main>
+        </body>
       </html>
     </ClerkProvider>
   );
