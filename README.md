@@ -106,6 +106,7 @@ Puedes acceder a la documentación en la siguiente ruta:
 Verificar si esta instalado swagger , aveces puede fallar
 npm install swagger-ui-react
 
+nota para gestion ejejje
 
 ```
 
