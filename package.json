@@ -3,10 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "npm run dev:db && next dev",
+    "dev:db": "prisma generate && prisma db push",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "postinstall": "prisma generate && prisma db push"
   },
   "dependencies": {
     "@clerk/localizations": "^3.14.2",

@@ -1,0 +1,80 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Usuario {
+  id              Int                  @id @default(autoincrement())
+  nombre          String
+  email           String               @unique
+  sueldo          Decimal?            @db.Decimal(10, 2)
+  fecha_registro  DateTime            @default(now()) @db.Date
+  moneda_preferida String
+  gastos          Gasto[]
+  ingresos        Ingreso[]
+  notificaciones  Notificacion[]
+  objetivos       ObjetivoFinanciero[]
+}
+
+model Categoria {
+  id        Int                  @id @default(autoincrement())
+  nombre    String
+  gastos    Gasto[]
+  ingresos  Ingreso[]
+  objetivos ObjetivoFinanciero[]
+}
+
+model Gasto {
+  id           Int       @id @default(autoincrement())
+  usuario      Usuario   @relation(fields: [usuario_id], references: [id], onDelete: Cascade)
+  usuario_id   Int
+  categoria    Categoria? @relation(fields: [categoria_id], references: [id], onDelete: SetNull)
+  categoria_id Int?
+  monto        Decimal   @db.Decimal(10, 2)
+  fecha        DateTime  @db.Date
+  descripcion  String?
+  factura      Boolean   @default(false)
+  metodo_pago  String?
+}
+
+model Notificacion {
+  id         Int      @id @default(autoincrement())
+  usuario    Usuario  @relation(fields: [usuario_id], references: [id], onDelete: Cascade)
+  usuario_id Int
+  mensaje    String
+  fecha      DateTime @default(now()) @db.Date
+  tipo       String
+}
+
+model ObjetivoFinanciero {
+  id            Int       @id @default(autoincrement())
+  usuario       Usuario   @relation(fields: [usuario_id], references: [id], onDelete: Cascade)
+  usuario_id    Int
+  categoria     Categoria? @relation(fields: [categoria_id], references: [id], onDelete: SetNull)
+  categoria_id  Int?
+  monto_limite  Decimal   @db.Decimal(10, 2)
+  fecha_inicio  DateTime  @db.Date
+  fecha_fin     DateTime  @db.Date
+}
+
+model Ingreso {
+  id           Int       @id @default(autoincrement())
+  usuario      Usuario   @relation(fields: [usuario_id], references: [id], onDelete: Cascade)
+  usuario_id   Int
+  categoria    Categoria? @relation(fields: [categoria_id], references: [id], onDelete: SetNull)
+  categoria_id Int?
+  monto        Decimal   @db.Decimal(10, 2)
+  fecha        DateTime  @db.Date
+  descripcion  String?
+  tipo_ingreso String    // Por ejemplo: "Salario", "Freelance", "Inversiones", etc.
+  recurrente   Boolean   @default(false)
+  frecuencia   String?   // Para ingresos recurrentes: "Mensual", "Quincenal", "Anual", etc.
+  fecha_fin    DateTime? @db.Date // Para ingresos recurrentes que tienen una fecha de finalización
+} 
