@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:16
+    container_name: tmm-db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: tmmoney
+      POSTGRES_DB: trackmymoney
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  app:
+    image: davshaw/tmm-app:latest
+    container_name: tmm-app
+    restart: always
+    environment:
+      DATABASE_URL: postgresql://postgres:tmmoney@db:5432/trackmymoney
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+
+volumes:
+  pgdata:
